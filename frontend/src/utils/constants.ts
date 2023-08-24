@@ -1,0 +1,1 @@
+export const phoneNumberRegex = /^\+\d+\s\d+\s\d{6,}$/;

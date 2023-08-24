@@ -1,0 +1,62 @@
+/* You can add this CSS to your styles.css or styles.scss file */
+
+/* Center align the content */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 0;
+  }
+  
+  /* Add spacing between sections */
+  .mb-3 {
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Style the search input */
+  .form-control {
+    width: 100%;
+  }
+  
+  /* Style the buttons */
+  .btn {
+    margin-right: 0.5rem;
+  }
+  
+  /* Style the loading/error message */
+  p {
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: center;
+    color: #dc3545;
+  }
+  
+  /* Style the table */
+  .table {
+    width: 100%;
+    border: 1px solid #dee2e6;
+  }
+  
+  /* Style the table header */
+  .table th {
+    font-weight: bold;
+    background-color: #f8f9fa;
+  }
+  
+  /* Style the table rows */
+  .table tbody tr {
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .table tbody tr:hover {
+    background-color: #f8f9fa;
+  }
+  
+  /* Style the "Add New Entry" button */
+  .btn-success {
+    margin-top: 1rem;
+  }
+  
