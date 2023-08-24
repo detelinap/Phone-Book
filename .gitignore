@@ -1,5 +1,22 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# Node.js
+node_modules/
+
+# Editor-specific
+.vscode/
+
+# Environment variables
+.env
+.env.local
+
+# Logs
+logs
+*.log
+
+# SQLite database
+*.db
+
 # dependencies
 /node_modules
 /.pnp
