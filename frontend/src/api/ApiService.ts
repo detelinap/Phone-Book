@@ -2,7 +2,7 @@ import axios from "axios";
 import { AxiosResponse } from "axios";
 import { PhonebookEntry } from "../utils/types";
 
-const API_BASE_URL = "http://localhost:3000/api/phonebook";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:3000/api/phonebook";
 
 const api = axios.create({
   baseURL: API_BASE_URL,
