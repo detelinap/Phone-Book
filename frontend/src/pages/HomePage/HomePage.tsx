@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Entry, PhonebookEntry } from "../../utils/types";
 import { fetchPhonebookEntries } from "../../api/ApiService";
 import { Container, Row, Col, Table, Button, Form } from "react-bootstrap";
-import './HomePage.module.css';
+import styles from "./HomePage.module.css";
 
 const HomePage: React.FC = () => {
   const [entries, setEntries] = useState<PhonebookEntry[]>([]);
@@ -13,13 +13,13 @@ const HomePage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchEntries(); 
+    fetchEntries();
   }, []);
 
   const fetchEntries = () => {
     setLoading(true);
     setError(null);
-    
+
     fetchPhonebookEntries()
       .then((data: PhonebookEntry[]) => {
         setEntries(data);
@@ -48,53 +48,63 @@ const HomePage: React.FC = () => {
   };
 
   return (
-    <Container>
-      <h1 className="mt-4">Phonebook Home</h1>
-      <Row className="mb-3">
-        <Col xs={8}>
-          <Form.Control
-            type="text"
-            placeholder="Search by name or number"
-            value={searchText}
-            onChange={handleSearchChange}
-          />
-        </Col>
-        <Col xs={2}>
-          <Button variant="primary" onClick={handleSearchClick}>Search</Button>
-        </Col>
-        <Col xs={2}>
-          <Button variant="secondary" onClick={fetchEntries}>Refresh</Button>
-        </Col>
-      </Row>
-      {loading ? (
-        <p>Loading...</p>
-      ) : error ? (
-        <p>{error}</p>
-      ) : (
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Phone Number</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {matchingEntries.map((entry) => (
-              <tr key={entry.id}>
-                <td>{entry.firstName}</td>
-                <td>{entry.lastName}</td>
-                <td>{entry.phoneNumber}</td>
-                <td>
-                  <Link to={`/edit/${entry.id}`} className="btn btn-primary">Edit</Link>
-                </td>
+    <Container className={styles.container}>
+      <div className={styles.formWrapper}>
+        <h1 className={styles.mt4}>Phonebook Home</h1>
+        <Row className={styles.mb3}>
+          <Col xs={12} md={6} className="mx-auto">
+            <Form.Control
+              type="text"
+              placeholder="Search by name or number"
+              value={searchText}
+              onChange={handleSearchChange}
+              className={styles.largerSearch}
+            />
+          </Col>
+          <Col xs={12} md={2} className="mx-auto">
+            <Button
+              variant="success"
+              onClick={handleSearchClick}
+              className={styles.centeredButton}
+            >
+              Search
+            </Button>
+          </Col>
+        </Row>
+        {loading ? (
+          <p>Loading...</p>
+        ) : error ? (
+          <p>{error}</p>
+        ) : (
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone Number</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
-      )}
-      <Link to="/add" className="btn btn-success">Add New Entry</Link>
+            </thead>
+            <tbody>
+              {matchingEntries.map((entry) => (
+                <tr key={entry.id}>
+                  <td>{entry.firstName}</td>
+                  <td>{entry.lastName}</td>
+                  <td>{entry.phoneNumber}</td>
+                  <td>
+                    <Link to={`/edit/${entry.id}`} className="btn btn-primary">
+                      Edit
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        )}
+        <Link to="/add" className={`btn ${styles.btnSuccess}`}>
+          Add New Entry
+        </Link>
+      </div>
     </Container>
   );
 };
