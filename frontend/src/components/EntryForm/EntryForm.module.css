@@ -1,0 +1,35 @@
+.formGroup {
+    margin-bottom: 1.5rem;
+  }
+  
+  .formLabel {
+    font-weight: bold;
+  }
+  
+  .formControl {
+    width: 100%;
+    font-size: 16px;
+    padding: 12px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+  }
+  
+  .errorMessage {
+    color: #dc3545;
+    font-size: 14px;
+  }
+  
+  .addButton {
+    width: 100%;
+    background-color: #28a745;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    color: white;
+  }
+  
+  .addButton:hover {
+    background-color: #218838;
+  } 
+  
