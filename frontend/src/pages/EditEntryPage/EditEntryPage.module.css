@@ -1,0 +1,41 @@
+/* EditEntryPage.module.css */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+.formWrapper {
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.backLink {
+  width: 50%;
+  margin-top: 1.5rem;
+  background-color: #2f8fde;
+  border: none;
+  padding: 10px 20px;
+  font-size: 12px;
+  border-radius: 4px;
+  color: white;
+  text-align: center; 
+  text-decoration: none; 
+  display: inline-block; 
+}
+
+.backLink:hover {
+  background-color: #24679e;
+} 
