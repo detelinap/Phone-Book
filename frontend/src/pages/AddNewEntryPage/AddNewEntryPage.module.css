@@ -41,10 +41,22 @@
   margin-top: 1rem;
 }
 
+
 .backLink {
-  display: block;
-  text-align: center;
-  margin-top: 10px;
-  color: #007bff;
-  text-decoration: none;
+  width: 50%;
+  margin-top: 1.5rem;
+  background-color: #2f8fde;
+  border: none;
+  padding: 10px 20px;
+  font-size: 12px;
+  border-radius: 4px;
+  color: white;
+  text-align: center; 
+  text-decoration: none; 
+  display: inline-block; 
 }
+
+.backLink:hover {
+  background-color: #24679e;
+} 
+ 
