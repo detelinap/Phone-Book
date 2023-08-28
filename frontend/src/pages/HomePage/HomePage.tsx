@@ -2,8 +2,10 @@ import React, { useState, ChangeEvent, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Entry, PhonebookEntry } from "../../utils/types";
 import { fetchPhonebookEntries } from "../../api/ApiService";
-import { Container, Row, Col, Table, Button, Form } from "react-bootstrap";
+import PhonebookTable from "../../components/PhonebookTable/PhonebookTable";
+import { Container, Row, Col, Button, Form, Modal } from "react-bootstrap";
 import styles from "./HomePage.module.css";
+import ErrorModal from "../../components/ErrorModal/ErrorModal";
 
 const HomePage: React.FC = () => {
   const [entries, setEntries] = useState<PhonebookEntry[]>([]);
@@ -11,6 +13,7 @@ const HomePage: React.FC = () => {
   const [matchingEntries, setMatchingEntries] = useState<Entry[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [noEntriesModalVisible, setNoEntriesModalVisible] = useState(false);
 
   useEffect(() => {
     fetchEntries();
@@ -39,7 +42,12 @@ const HomePage: React.FC = () => {
         entry.phoneNumber.includes(searchText)
     );
 
-    setMatchingEntries(filteredEntries);
+    if (filteredEntries.length === 0) {
+      setNoEntriesModalVisible(true);
+    } else {
+      setMatchingEntries(filteredEntries);
+      setNoEntriesModalVisible(false);
+    }
   };
 
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -47,10 +55,14 @@ const HomePage: React.FC = () => {
     setSearchText(newSearchText);
   };
 
+  const handleCloseNoEntriesModal = () => {
+    setNoEntriesModalVisible(false);
+  };
+
   return (
     <Container className={styles.container}>
       <div className={styles.formWrapper}>
-        <h1 className={styles.mt4}>Phonebook Home</h1>
+        <h1 className={styles.mt4}>Phonebook </h1>
         <Row className={styles.mb3}>
           <Col xs={12} md={6} className="mx-auto">
             <Form.Control
@@ -63,7 +75,7 @@ const HomePage: React.FC = () => {
           </Col>
           <Col xs={12} md={2} className="mx-auto">
             <Button
-              variant="success"
+              variant="primary"
               onClick={handleSearchClick}
               className={styles.centeredButton}
             >
@@ -76,35 +88,23 @@ const HomePage: React.FC = () => {
         ) : error ? (
           <p>{error}</p>
         ) : (
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Phone Number</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {matchingEntries.map((entry) => (
-                <tr key={entry.id}>
-                  <td>{entry.firstName}</td>
-                  <td>{entry.lastName}</td>
-                  <td>{entry.phoneNumber}</td>
-                  <td>
-                    <Link to={`/edit/${entry.id}`} className="btn btn-primary">
-                      Edit
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+          <>
+            {matchingEntries.length > 0 ? (
+              <PhonebookTable entries={matchingEntries} />
+            ) : null}
+          </>
         )}
-        <Link to="/add" className={`btn ${styles.btnSuccess}`}>
+        <Link to="/add" className={styles.addButton}>
           Add New Entry
         </Link>
       </div>
+
+      <ErrorModal
+        show={noEntriesModalVisible}
+        onClose={handleCloseNoEntriesModal}
+        title="No Entries Found"
+        errorMessage="No entries match your search criteria."
+      />
     </Container>
   );
 };
