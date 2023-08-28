@@ -4,7 +4,7 @@ Welcome to the Phonebook Application repository! This project is a simple web ap
 
 Features:
 - Add new contacts with names and phone numbers.
-- View, edit, and delete existing contacts.
+- View and edit existing contacts.
 - Search for contacts based on name.
 - RESTful API endpoints built with Express.js to handle CRUD operations.
 - Client-side rendering using React.js for a smooth user experience.
@@ -23,6 +23,7 @@ Getting Started:
 
 5. Navigate to the `frontend` directory and run `npm install` to install frontend dependencies.
 6. Run the frontend development server using `npm start`.
+7. Select port 3001
 
 Feel free to report issues, suggest improvements, or contribute to any part of the application.
 
